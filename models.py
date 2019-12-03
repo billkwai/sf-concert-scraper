@@ -12,7 +12,7 @@ class EventModel(db.Model):
   title = db.Column(db.String(), unique=False, nullable=False, primary_key=True)
   venue = db.Column(db.String(), unique=False, nullable=False, primary_key=True)
   url = db.Column(db.String(), unique=False, nullable=True)
-  
+
   #change to datetime
   date = db.Column(db.Date, unique=False, nullable=False, primary_key=True)
 
@@ -22,7 +22,7 @@ class EventModel(db.Model):
 
   # precision(x) scale(y) xxxx.yy
   # No sitatuion where a ticket price should exceed $9999.99
-  price = db.Column(db.Decimal(precision=4, scale=2), unique=False, nullable=False)
+  price = db.Column(db.Integer, unique=False, nullable=False)
 
   def __init__(self, title, venue, url, date, time, price):
     self.title = title

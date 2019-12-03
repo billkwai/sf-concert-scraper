@@ -32,11 +32,15 @@ def scrape_fillmore():
     event_time_raw = re.search(event_time_re, event_details_string).group(1)
     event_price_raw = re.search(event_price_re, event_details_string).group(1)
 
+    # formats raw date and time into datetime for insertion into database
     date_format = '%B %d, %Y'
     time_format = '%I:%M %p'
     datetime_format = to_datetime(event_date_raw, event_time_raw.replace('.', ''), date_format, time_format)
 
-    event_list.append((event_title, event_url, datetime_format, event_price_raw))
+    # formats raw price into integer for insertion into database
+    event_price = event_price_raw.replace('.', '').replace('$','')
+
+    event_list.append((event_title, event_url, datetime_format, event_price))
 
   return event_list
 
