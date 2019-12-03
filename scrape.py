@@ -22,7 +22,7 @@ def scrape_fillmore():
   all_events = soup.find_all('div', class_='faq_main calendar')
   for event in all_events:
     event_title_p = event.find('p', class_='title')
-    event_title = event_title_p.a.string
+    event_title = event_title_p.a.text
     event_url = event_title_p.a.get('href')
     event_details = event.find('span', class_='content')
     event_details_string = str(event_details)
