@@ -12,6 +12,8 @@ class EventModel(db.Model):
   title = db.Column(db.String(), unique=False, nullable=False, primary_key=True)
   venue = db.Column(db.String(), unique=False, nullable=False, primary_key=True)
   url = db.Column(db.String(), unique=False, nullable=True)
+  
+  #change to datetime
   date = db.Column(db.Date, unique=False, nullable=False, primary_key=True)
 
   # time will always be in pacific time because this is for SF venues.

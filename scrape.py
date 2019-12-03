@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import re
 import requests
+from datetime import datetime
 
 def scrape():
   return scrape_fillmore()
@@ -31,7 +32,16 @@ def scrape_fillmore():
     event_time_raw = re.search(event_time_re, event_details_string).group(1)
     event_price_raw = re.search(event_price_re, event_details_string).group(1)
 
-    event_list.append((event_title, event_url, event_date_raw, event_time_raw, event_price_raw))
+    date_format = '%B %d, %Y'
+    time_format = '%I:%M %p'
+    datetime_format = to_datetime(event_date_raw, event_time_raw.replace('.', ''), date_format, time_format)
+
+    event_list.append((event_title, event_url, datetime_format, event_price_raw))
 
   return event_list
+
+def to_datetime(date, time, date_format, time_format):
+  datetime_format = datetime.strptime(date + ' ' + time, date_format + ' ' + time_format)
+  return datetime_format
+
 
